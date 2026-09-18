@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trắc nghiệm Đại số tuyến tính - Chương 1</title>
+    <!-- Cấu hình MathJax -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            max-width: 950px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+            padding: 30px 35px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+        h1 {
+            text-align: center;
+            color: #0f2027;
+            font-size: 26px;
+            margin-bottom: 5px;
+            border-bottom: 3px solid #2c5364;
+            padding-bottom: 15px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .progress-info {
+            text-align: center;
+            color: #2c5364;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 22px 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #2c5364;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        .question-card.correct-highlight {
+            border-left-color: #28a745;
+            background: #f0fff4;
+        }
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .question-number {
+            display: inline-block;
+            background: #2c5364;
+            color: white;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .difficulty-badge {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .difficulty-easy {
+            background: #d4edda;
+            color: #155724;
+        }
+        .difficulty-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .difficulty-hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .question-text {
+            font-size: 16.5px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 12px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-size: 15px;
+            background: white;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            user-select: none;
+        }
+        .option:hover:not(.disabled) {
+            border-color: #2c5364;
+            background: #eef4f8;
+            transform: translateX(5px);
+        }
+        .option .label {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            font-weight: 700;
+            font-size: 14px;
+            color: #555;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+            margin-top: 2px;
+        }
+        .option .option-text {
+            flex: 1;
+            line-height: 1.6;
+        }
+        .option.correct {
+            border-color: #28a745 !important;
+            background: #d4edda !important;
+            color: #155724;
+            font-weight: 600;
+        }
+        .option.correct .label {
+            background: #28a745;
+            color: white;
+        }
+        .option.incorrect {
+            border-color: #dc3545 !important;
+            background: #f8d7da !important;
+            color: #721c24;
+            font-weight: 600;
+        }
+        .option.incorrect .label {
+            background: #dc3545;
+            color: white;
+        }
+        .option.disabled {
+            cursor: default;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 15px 18px;
+            border-radius: 10px;
+            font-size: 14.5px;
+            line-height: 1.8;
+            display: none;
+            border-left: 4px solid #17a2b8;
+            background: #e8f4f8;
+            color: #0c5460;
+        }
+        .explanation.show {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .explanation strong {
+            color: #0c5460;
+        }
+        .score-board {
+            position: sticky;
+            bottom: 20px;
+            background: white;
+            border-radius: 15px;
+            padding: 15px 25px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            border: 2px solid #2c5364;
+            z-index: 100;
+        }
+        .score-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        .score-text span {
+            color: #2c5364;
+            font-size: 22px;
+        }
+        .btn-reset {
+            background: #2c5364;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .btn-reset:hover {
+            background: #1a3240;
+            transform: scale(1.05);
+        }
+        .completed-badge {
+            display: none;
+            text-align: center;
+            padding: 12px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        .completed-badge.show {
+            display: block;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 18px; }
+            h1 { font-size: 20px; }
+            .question-text { font-size: 15px; }
+            .option { font-size: 13.5px; padding: 10px 14px; }
+            .score-board { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📐 Trắc nghiệm Đại số tuyến tính - Chương 1</h1>
+        <p class="subtitle">Ma trận — Định thức — Hạng — Ma trận nghịch đảo — Hệ phương trình tuyến tính</p>
+        <p class="progress-info">Đã trả lời: <span id="progress">0</span> / 30 câu</p>
+
+        <div id="quiz-container"></div>
+
+        <div class="completed-badge" id="completedBadge">🎉 Chúc mừng! Bạn đã hoàn thành tất cả 30 câu hỏi.</div>
+
+        <div class="score-board">
+            <div class="score-text">Điểm: <span id="score">0</span> / 30</div>
+            <button class="btn-reset" onclick="resetQuiz()">🔄 Làm lại</button>
+        </div>
+    </div>
+
+    <script>
+        // ==================== NGÂN HÀNG 30 CÂU HỎI ====================
+        const questions = [
+            // ===== CẤP ĐỘ DỄ (10 câu) =====
+            {
+                difficulty: "Dễ",
+                question: "Cho ma trận $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$. Phần tử $a_{21}$ của ma trận $A$ bằng bao nhiêu?",
+                options: ["$a_{21} = 1$", "$a_{21} = 2$", "$a_{21} = 3$", "$a_{21} = 4$"],
+                correct: 2,
+                explanation: "<strong>Đáp án đúng: C.</strong> Phần tử $a_{ij}$ nằm ở giao điểm của hàng $i$ và cột $j$. Vậy $a_{21}$ là phần tử ở hàng 2, cột 1 của ma trận $A$, tức là $a_{21} = 3$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: $a_{11} = 1$ (hàng 1, cột 1).<br>• B: $a_{12} = 2$ (hàng 1, cột 2).<br>• D: $a_{22} = 4$ (hàng 2, cột 2)."
+            },
+            {
+                difficulty: "Dễ",
+                question: "Ma trận $A = \\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}$ được gọi là gì?",
+                options: ["Ma trận không", "Ma trận đơn vị", "Ma trận chéo", "Cả B và C đều đúng"],
+                correct: 3,
+                explanation: "<strong>Đáp án đúng: D.</strong> Ma trận này vừa là ma trận đơn vị (các phần tử trên đường chéo chính bằng 1, còn lại bằng 0), vừa là ma trận chéo (các phần tử ngoài đường chéo chính bằng 0).<br><br><em>Giải thích các đáp án khác:</em><br>• A: Ma trận không có tất cả các phần tử bằng 0.<br>• B: Đúng nhưng chưa đầy đủ.<br>• C: Đúng nhưng chưa đầy đủ."
+            },
+            {
+                difficulty: "Dễ",
+                question: "Cho $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$ và $B = \\begin{bmatrix} 5 & 6 \\\\ 7 & 8 \\end{bmatrix}$. Tính $A + B$.",
+                options: [
+                    "$\\begin{bmatrix} 6 & 8 \\\\ 10 & 12 \\end{bmatrix}$",
+                    "$\\begin{bmatrix} 5 & 12 \\\\ 21 & 32 \\end{bmatrix}$",
+                    "$\\begin{bmatrix} 4 & 4 \\\\ 4 & 4 \\end{bmatrix}$",
+                    "$\\begin{bmatrix} 6 & 10 \\\\ 8 & 12 \\end{bmatrix}$"
+                ],
+                correct: 0,
+                explanation: "<strong>Đáp án đúng: A.</strong> Phép cộng hai ma trận cùng cấp được thực hiện bằng cách cộng từng phần tử tương ứng:<br>$$A + B = \\begin{bmatrix} 1+5 & 2+6 \\\\ 3+7 & 4+8 \\end{bmatrix} = \\begin{bmatrix} 6 & 8 \\\\ 10 & 12 \\end{bmatrix}$$<br><br><em>Giải thích các đáp án khác:</em><br>• B: Đây là kết quả của phép nhân Hadamard (nhân từng phần tử).<br>• C: Sai hoàn toàn.<br>• D: Sai vị trí các phần tử."
+            },
+            {
+                difficulty: "Dễ",
+                question: "Cho ma trận $A = \\begin{bmatrix} 2 & -1 \\\\ 3 & 4 \\end{bmatrix}$. Tính định thức $\\det(A)$.",
+                options: ["$\\det(A) = 5$", "$\\det(A) = 11$", "$\\det(A) = 8$", "$\\det(A) = -5$"],
+                correct: 1,
+                explanation: "<strong>Đáp án đúng: B.</strong> Với ma trận cấp 2 $A = \\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}$, định thức được tính bởi $\\det(A) = ad - bc$.<br>Áp dụng: $\\det(A) = 2 \\cdot 4 - (-1) \\cdot 3 = 8 + 3 = 11$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai do tính nhầm $2 \\cdot 4 - 3 = 5$.<br>• C: Sai do quên dấu trừ.<br>• D: Sai dấu."
+            },
+            {
+                difficulty: "Dễ",
+                question: "Ma trận chuyển vị của $A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}$ là:",
+                options: [
+                    "$\\begin{bmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{bmatrix}$",
+                    "$\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}$",
+                    "$\\begin{bmatrix} 6 & 5 & 4 \\\\ 3 & 2 & 1 \\end{bmatrix}$",
+                    "$\\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\\\ 5 & 6 \\end{bmatrix}$"
+                ],
+                correct: 0,
+                explanation: "<strong>Đáp án đúng: A.</strong> Ma trận chuyển vị $A^t$ được tạo bằng cách đổi hàng thành cột, cột thành hàng. Ma trận $A$ cỡ $2 \\times 3$ nên $A^t$ cỡ $3 \\times 2$:<br>$$A^t = \\begin{bmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{bmatrix}$$<br><br><em>Giải thích các đáp án khác:</em><br>• B: Không đổi gì cả.<br>• C: Đây không phải là chuyển vị.<br>• D: Sai kích thước."
+            },
+            {
+                difficulty: "Dễ",
+                question: "Ma trận không cấp $2 \\times 3$ là ma trận:",
+                options: [
+                    "$\\begin{bmatrix} 0 & 0 \\\\ 0 & 0 \\end{bmatrix}$",
+                    "$\\begin{bmatrix} 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{bmatrix}$",
+                    "$\\begin{bmatrix} 0 & 0 \\\\ 0 & 0 \\\\ 0 & 0 \\end{bmatrix}$",
+                    "$\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\end{bmatrix}$"
+                ],
+                correct: 1,
+                explanation: "<strong>Đáp án đúng: B.</strong> Ma trận không cấp $m \\times n$ là ma trận có $m$ hàng, $n$ cột và tất cả các phần tử bằng 0. Vậy ma trận không cấp $2 \\times 3$ có 2 hàng, 3 cột.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Cấp $2 \\times 2$.<br>• C: Cấp $3 \\times 2$.<br>• D: Không phải ma trận không (có phần tử bằng 1)."
+            },
+            {
+                difficulty: "Dễ",
+                question: "Cho $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$. Tính $2A$.",
+                options: [
+                    "$\\begin{bmatrix} 2 & 4 \\\\ 6 & 8 \\end{bmatrix}$",
+                    "$\\begin{bmatrix} 1 & 4 \\\\ 9 & 4 \\end{bmatrix}$",
+                    "$\\begin{bmatrix} 2 & 2 \\\\ 3 & 8 \\end{bmatrix}$",
+                    "$\\begin{bmatrix} 3 & 4 \\\\ 5 & 6 \\end{bmatrix}$"
+                ],
+                correct: 0,
+                explanation: "<strong>Đáp án đúng: A.</strong> Phép nhân ma trận với một số thực $k$ được thực hiện bằng cách nhân từng phần tử của ma trận với $k$:<br>$$2A = 2 \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix} = \\begin{bmatrix} 2 & 4 \\\\ 6 & 8 \\end{bmatrix}$$<br><br><em>Giải thích các đáp án khác:</em><br>• B, C, D: Đều là kết quả của việc nhân sai vị trí."
+            },
+            {
+                difficulty: "Dễ",
+                question: "Hai ma trận $A$ và $B$ được gọi là bằng nhau khi và chỉ khi:",
+                options: [
+                    "Chúng có cùng số hàng.",
+                    "Chúng có cùng số cột.",
+                    "Chúng cùng cỡ và các phần tử tương ứng bằng nhau.",
+                    "Chúng có cùng định thức."
+                ],
+                correct: 2,
+                explanation: "<strong>Đáp án đúng: C.</strong> Hai ma trận $A = [a_{ij}]_{m \\times n}$ và $B = [b_{ij}]_{m \\times n}$ được gọi là bằng nhau nếu chúng cùng cỡ và $a_{ij} = b_{ij}$ với mọi $i, j$.<br><br><em>Giải thích các đáp án khác:</em><br>• A, B: Chỉ cùng số hàng hoặc cùng số cột là chưa đủ.<br>• D: Cùng định thức không đảm bảo hai ma trận bằng nhau."
+            },
+            {
+                difficulty: "Dễ",
+                question: "Ma trận tam giác trên là ma trận vuông có:",
+                options: [
+                    "Tất cả các phần tử nằm trên đường chéo chính bằng 0.",
+                    "Tất cả các phần tử nằm dưới đường chéo chính bằng 0.",
+                    "Tất cả các phần tử nằm ngoài đường chéo chính bằng 0.",
+                    "Tất cả các phần tử đều bằng 0."
+                ],
+                correct: 1,
+                explanation: "<strong>Đáp án đúng: B.</strong> Ma trận tam giác trên là ma trận vuông cấp $n$ mà tất cả các phần tử nằm dưới đường chéo chính đều bằng 0, tức là $a_{ij} = 0$ nếu $i > j$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Đây là ma trận tam giác dưới.<br>• C: Đây là ma trận chéo.<br>• D: Đây là ma trận không."
+            },
+            {
+                difficulty: "Dễ",
+                question: "Định thức của ma trận đơn vị cấp $n$ bằng bao nhiêu?",
+                options: ["$0$", "$1$", "$n$", "$-1$"],
+                correct: 1,
+                explanation: "<strong>Đáp án đúng: B.</strong> Ma trận đơn vị $I_n$ có các phần tử trên đường chéo chính bằng 1, còn lại bằng 0. Vì là ma trận tam giác (vừa trên vừa dưới), định thức bằng tích các phần tử trên đường chéo chính: $\\det(I_n) = 1 \\cdot 1 \\cdots 1 = 1$.<br><br><em>Giải thích các đáp án khác:</em><br>• A, C, D: Đều sai."
+            },
+
+            // ===== CẤP ĐỘ TRUNG BÌNH (12 câu) =====
+            {
+                difficulty: "Trung bình",
+                question: "Cho $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$ và $B = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}$. Tính tích $AB$.",
+                options: [
+                    "$AB = \\begin{bmatrix} 2 & 1 \\\\ 4 & 3 \\end{bmatrix}$",
+                    "$AB = \\begin{bmatrix} 0 & 2 \\\\ 3 & 0 \\end{bmatrix}$",
+                    "$AB = \\begin{bmatrix} 3 & 4 \\\\ 1 & 2 \\end{bmatrix}$",
+                    "$AB = \\begin{bmatrix} 1 & 2 \\\\ 4 & 3 \\end{bmatrix}$"
+                ],
+                correct: 0,
+                explanation: "<strong>Đáp án đúng: A.</strong> Nhân hai ma trận theo quy tắc \"hàng nhân cột\":<br>$$AB = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix} \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix} = \\begin{bmatrix} 1\\cdot0+2\\cdot1 & 1\\cdot1+2\\cdot0 \\\\ 3\\cdot0+4\\cdot1 & 3\\cdot1+4\\cdot0 \\end{bmatrix} = \\begin{bmatrix} 2 & 1 \\\\ 4 & 3 \\end{bmatrix}$$<br><br><em>Giải thích các đáp án khác:</em><br>• B, C, D: Đều là kết quả của việc nhân sai vị trí hàng/cột."
+            },
+            {
+                difficulty: "Trung bình",
+                question: "Ma trận nghịch đảo của $A = \\begin{bmatrix} 2 & 1 \\\\ 5 & 3 \\end{bmatrix}$ là:",
+                options: [
+                    "$A^{-1} = \\begin{bmatrix} 3 & -1 \\\\ -5 & 2 \\end{bmatrix}$",
+                    "$A^{-1} = \\begin{bmatrix} 3 & 1 \\\\ 5 & 2 \\end{bmatrix}$",
+                    "$A^{-1} = \\begin{bmatrix} -3 & 1 \\\\ 5 & -2 \\end{bmatrix}$",
+                    "$A^{-1} = \\begin{bmatrix} 2 & -1 \\\\ -5 & 3 \\end{bmatrix}$"
+                ],
+                correct: 0,
+                explanation: "<strong>Đáp án đúng: A.</strong> Với ma trận cấp 2 $A = \\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}$, nếu $\\det(A) = ad - bc \\neq 0$ thì:<br>$$A^{-1} = \\frac{1}{ad-bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$<br>Ở đây $\\det(A) = 2\\cdot3 - 1\\cdot5 = 1$. Do đó:<br>$$A^{-1} = \\begin{bmatrix} 3 & -1 \\\\ -5 & 2 \\end{bmatrix}$$<br><br><em>Giải thích các đáp án khác:</em><br>• B, D: Sai vị trí dấu.<br>• C: Sai dấu toàn bộ."
+            },
+            {
+                difficulty: "Trung bình",
+                question: "Ma trận $A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 2 & 4 & 6 \\\\ 1 & 1 & 1 \\end{bmatrix}$ có hạng bằng bao nhiêu?",
+                options: ["$\\text{rank}(A) = 1$", "$\\text{rank}(A) = 2$", "$\\text{rank}(A) = 3$", "$\\text{rank}(A) = 0$"],
+                correct: 1,
+                explanation: "<strong>Đáp án đúng: B.</strong> Ta thấy hàng 2 bằng 2 lần hàng 1 ($R_2 = 2R_1$), nên hai hàng này phụ thuộc tuyến tính. Do đó hạng tối đa chỉ có thể là 2.<br>Xét hai hàng $R_1 = (1, 2, 3)$ và $R_3 = (1, 1, 1)$: chúng không tỉ lệ, nên độc lập tuyến tính.<br>Vậy $\\text{rank}(A) = 2$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai vì $R_1$ và $R_3$ độc lập tuyến tính.<br>• C: Sai vì $R_2 = 2R_1$.<br>• D: Sai vì ma trận khác không."
+            },
+            {
+                difficulty: "Trung bình",
+                question: "Điều kiện cần và đủ để ma trận vuông $A$ cấp $n$ khả nghịch là:",
+                options: [
+                    "$A$ có tất cả các phần tử khác 0.",
+                    "$\\det(A) \\neq 0$.",
+                    "$A$ là ma trận đối xứng.",
+                    "$A$ có ít nhất một hàng toàn số 0."
+                ],
+                correct: 1,
+                explanation: "<strong>Đáp án đúng: B.</strong> Ma trận vuông $A$ khả nghịch khi và chỉ khi $\\det(A) \\neq 0$. Khi đó:<br>$$A^{-1} = \\frac{1}{\\det(A)} \\cdot \\text{adj}(A)$$<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai, ví dụ $A = \\begin{bmatrix} 1 & 1 \\\\ 1 & 1 \\end{bmatrix}$ có các phần tử khác 0 nhưng $\\det(A) = 0$.<br>• C: Ma trận đối xứng không đảm bảo khả nghịch.<br>• D: Nếu có hàng toàn số 0 thì $\\det(A) = 0$, không khả nghịch."
+            },
+            {
+                difficulty: "Trung bình",
+                question: "Phát biểu nào sau đây về định thức là <strong>SAI</strong>?",
+                options: [
+                    "$\\det(A^T) = \\det(A)$.",
+                    "$\\det(AB) = \\det(A) \\cdot \\det(B)$.",
+                    "$\\det(A + B) = \\det(A) + \\det(B)$.",
+                    "Nếu đổi chỗ hai hàng thì định thức đổi dấu."
+                ],
+                correct: 2,
+                explanation: "<strong>Đáp án đúng (phát biểu SAI): C.</strong> Định thức <em>không</em> có tính chất cộng tuyến tính. Nói chung $\\det(A+B) \\neq \\det(A) + \\det(B)$.<br>Ví dụ: $A = \\begin{bmatrix} 1 & 0 \\\\ 0 & 0 \\end{bmatrix}$, $B = \\begin{bmatrix} 0 & 0 \\\\ 0 & 1 \\end{bmatrix}$ thì $\\det(A) = \\det(B) = 0$ nhưng $\\det(A+B) = 1$.<br><br><em>Giải thích các đáp án còn lại (đều ĐÚNG):</em><br>• A: Định thức không đổi khi chuyển vị.<br>• B: Tính nhân tính của định thức.<br>• D: Đổi chỗ hai hàng thì định thức đổi dấu."
+            },
+            {
+                difficulty: "Trung bình",
+                question: "Hạng của ma trận $A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\end{bmatrix}$ bằng bao nhiêu?",
+                options: ["$\\text{rank}(A) = 1$", "$\\text{rank}(A) = 2$", "$\\text{rank}(A) = 3$", "$\\text{rank}(A) = 0$"],
+                correct: 1,
+                explanation: "<strong>Đáp án đúng: B.</strong> Nhận xét: $R_3 - R_2 = (3, 3, 3) = R_2 - R_1$, tức $R_1 + R_3 = 2R_2$, nên ba hàng phụ thuộc tuyến tính. Do đó $\\text{rank}(A) \\leq 2$.<br>Mặt khác, định thức con cấp 2 $\\begin{vmatrix} 1 & 2 \\\\ 4 & 5 \\end{vmatrix} = 5 - 8 = -3 \\neq 0$, nên $\\text{rank}(A) \\geq 2$.<br>Vậy $\\text{rank}(A) = 2$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai vì có định thức con cấp 2 khác 0.<br>• C: Sai vì $\\det(A) = 0$.<br>• D: Sai vì ma trận khác không."
+            },
+            {
+                difficulty: "Trung bình",
+                question: "Cho ma trận $A$ vuông cấp 3 có $\\det(A) = 4$. Khi đó $\\det(2A)$ bằng bao nhiêu?",
+                options: ["$\\det(2A) = 8$", "$\\det(2A) = 32$", "$\\det(2A) = 16$", "$\\det(2A) = 4$"],
+                correct: 1,
+                explanation: "<strong>Đáp án đúng: B.</strong> Với ma trận vuông cấp $n$ và hằng số $k$, ta có: $\\det(kA) = k^n \\det(A)$.<br>Ở đây $n = 3$ và $k = 2$, nên:<br>$$\\det(2A) = 2^3 \\cdot 4 = 8 \\cdot 4 = 32$$<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai do nhầm $\\det(2A) = 2 \\cdot 4 = 8$.<br>• C: Sai do nhầm $n=2$.<br>• D: Sai do nghĩ $\\det(2A) = \\det(A)$."
+            },
+            {
+                difficulty: "Trung bình",
+                question: "Phát biểu nào sau đây là <strong>ĐÚNG</strong> về ma trận nghịch đảo?",
+                options: [
+                    "Mọi ma trận vuông đều có ma trận nghịch đảo.",
+                    "Nếu $A$ khả nghịch thì $(A^{-1})^{-1} = A$.",
+                    "Nếu $A, B$ khả nghịch thì $(AB)^{-1} = A^{-1}B^{-1}$.",
+                    "Ma trận nghịch đảo của $A$ là ma trận chuyển vị của $A$."
+                ],
+                correct: 1,
+                explanation: "<strong>Đáp án đúng: B.</strong> Nếu $A$ khả nghịch thì $A^{-1}$ cũng khả nghịch và $(A^{-1})^{-1} = A$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai, chỉ ma trận vuông có $\\det \\neq 0$ mới khả nghịch.<br>• C: Sai, công thức đúng là $(AB)^{-1} = B^{-1}A^{-1}$.<br>• D: Sai, chỉ ma trận trực giao mới có $A^{-1} = A^T$."
+            },
+            {
+                difficulty: "Trung bình",
+                question: "Cho $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$ và $B = \\begin{bmatrix} 2 & 0 \\\\ 1 & 2 \\end{bmatrix}$. Tính $\\det(AB)$.",
+                options: ["$\\det(AB) = -4$", "$\\det(AB) = 4$", "$\\det(AB) = 8$", "$
