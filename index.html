@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trắc nghiệm Đại số tuyến tính - Chương 1</title>
+    <title>Trắc nghiệm Vật lý - Lực ma sát</title>
     <!-- Cấu hình MathJax -->
     <script>
         MathJax = {
@@ -24,7 +24,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             margin: 0;
             padding: 20px;
@@ -33,42 +33,35 @@
             align-items: flex-start;
         }
         .container {
-            max-width: 950px;
+            max-width: 850px;
             width: 100%;
             background: #ffffff;
             border-radius: 20px;
-            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             padding: 30px 35px;
             margin-top: 20px;
             margin-bottom: 40px;
         }
         h1 {
             text-align: center;
-            color: #0f2027;
-            font-size: 26px;
+            color: #2c3e50;
+            font-size: 28px;
             margin-bottom: 5px;
-            border-bottom: 3px solid #2c5364;
+            border-bottom: 3px solid #764ba2;
             padding-bottom: 15px;
         }
         .subtitle {
             text-align: center;
             color: #7f8c8d;
             font-size: 14px;
-            margin-bottom: 10px;
-        }
-        .progress-info {
-            text-align: center;
-            color: #2c5364;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         .question-card {
             background: #f8f9fa;
             border-radius: 15px;
             padding: 22px 25px;
             margin-bottom: 25px;
-            border-left: 5px solid #2c5364;
+            border-left: 5px solid #764ba2;
             box-shadow: 0 3px 10px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
         }
@@ -76,48 +69,22 @@
             border-left-color: #28a745;
             background: #f0fff4;
         }
-        .question-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
         .question-number {
             display: inline-block;
-            background: #2c5364;
+            background: #764ba2;
             color: white;
             padding: 4px 14px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
-        }
-        .difficulty-badge {
-            display: inline-block;
-            padding: 3px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        .difficulty-easy {
-            background: #d4edda;
-            color: #155724;
-        }
-        .difficulty-medium {
-            background: #fff3cd;
-            color: #856404;
-        }
-        .difficulty-hard {
-            background: #f8d7da;
-            color: #721c24;
+            margin-bottom: 12px;
         }
         .question-text {
-            font-size: 16.5px;
+            font-size: 17px;
             font-weight: 600;
             color: #2c3e50;
             margin-bottom: 18px;
-            line-height: 1.7;
+            line-height: 1.6;
         }
         .options {
             display: flex;
@@ -130,16 +97,16 @@
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.25s ease;
-            font-size: 15px;
+            font-size: 15.5px;
             background: white;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 12px;
             user-select: none;
         }
         .option:hover:not(.disabled) {
-            border-color: #2c5364;
-            background: #eef4f8;
+            border-color: #764ba2;
+            background: #f3effa;
             transform: translateX(5px);
         }
         .option .label {
@@ -155,11 +122,6 @@
             color: #555;
             flex-shrink: 0;
             transition: all 0.25s ease;
-            margin-top: 2px;
-        }
-        .option .option-text {
-            flex: 1;
-            line-height: 1.6;
         }
         .option.correct {
             border-color: #28a745 !important;
@@ -188,8 +150,8 @@
             margin-top: 15px;
             padding: 15px 18px;
             border-radius: 10px;
-            font-size: 14.5px;
-            line-height: 1.8;
+            font-size: 15px;
+            line-height: 1.7;
             display: none;
             border-left: 4px solid #17a2b8;
             background: #e8f4f8;
@@ -212,12 +174,12 @@
             background: white;
             border-radius: 15px;
             padding: 15px 25px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 20px;
-            border: 2px solid #2c5364;
+            border: 2px solid #764ba2;
             z-index: 100;
         }
         .score-text {
@@ -226,11 +188,11 @@
             color: #2c3e50;
         }
         .score-text span {
-            color: #2c5364;
+            color: #764ba2;
             font-size: 22px;
         }
         .btn-reset {
-            background: #2c5364;
+            background: #764ba2;
             color: white;
             border: none;
             padding: 10px 25px;
@@ -241,7 +203,7 @@
             transition: all 0.25s ease;
         }
         .btn-reset:hover {
-            background: #1a3240;
+            background: #5a3a7a;
             transform: scale(1.05);
         }
         .completed-badge {
@@ -260,217 +222,281 @@
         }
         @media (max-width: 600px) {
             .container { padding: 18px; }
-            h1 { font-size: 20px; }
-            .question-text { font-size: 15px; }
-            .option { font-size: 13.5px; padding: 10px 14px; }
+            h1 { font-size: 22px; }
+            .question-text { font-size: 15.5px; }
+            .option { font-size: 14px; padding: 10px 14px; }
             .score-board { flex-direction: column; gap: 10px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📐 Trắc nghiệm Đại số tuyến tính - Chương 1</h1>
-        <p class="subtitle">Ma trận — Định thức — Hạng — Ma trận nghịch đảo — Hệ phương trình tuyến tính</p>
-        <p class="progress-info">Đã trả lời: <span id="progress">0</span> / 30 câu</p>
+        <h1>⚛️ Trắc nghiệm Vật lý: Lực ma sát</h1>
+        <p class="subtitle">Chọn đáp án đúng — 10 câu hỏi</p>
 
         <div id="quiz-container"></div>
 
-        <div class="completed-badge" id="completedBadge">🎉 Chúc mừng! Bạn đã hoàn thành tất cả 30 câu hỏi.</div>
+        <div class="completed-badge" id="completedBadge">🎉 Chúc mừng! Bạn đã hoàn thành tất cả câu hỏi.</div>
 
         <div class="score-board">
-            <div class="score-text">Điểm: <span id="score">0</span> / 30</div>
+            <div class="score-text">Điểm: <span id="score">0</span> / 10</div>
             <button class="btn-reset" onclick="resetQuiz()">🔄 Làm lại</button>
         </div>
     </div>
 
     <script>
-        // ==================== NGÂN HÀNG 30 CÂU HỎI ====================
+        // ==================== NGÂN HÀNG CÂU HỎI ====================
         const questions = [
-            // ===== CẤP ĐỘ DỄ (10 câu) =====
             {
-                difficulty: "Dễ",
-                question: "Cho ma trận $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$. Phần tử $a_{21}$ của ma trận $A$ bằng bao nhiêu?",
-                options: ["$a_{21} = 1$", "$a_{21} = 2$", "$a_{21} = 3$", "$a_{21} = 4$"],
-                correct: 2,
-                explanation: "<strong>Đáp án đúng: C.</strong> Phần tử $a_{ij}$ nằm ở giao điểm của hàng $i$ và cột $j$. Vậy $a_{21}$ là phần tử ở hàng 2, cột 1 của ma trận $A$, tức là $a_{21} = 3$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: $a_{11} = 1$ (hàng 1, cột 1).<br>• B: $a_{12} = 2$ (hàng 1, cột 2).<br>• D: $a_{22} = 4$ (hàng 2, cột 2)."
-            },
-            {
-                difficulty: "Dễ",
-                question: "Ma trận $A = \\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}$ được gọi là gì?",
-                options: ["Ma trận không", "Ma trận đơn vị", "Ma trận chéo", "Cả B và C đều đúng"],
-                correct: 3,
-                explanation: "<strong>Đáp án đúng: D.</strong> Ma trận này vừa là ma trận đơn vị (các phần tử trên đường chéo chính bằng 1, còn lại bằng 0), vừa là ma trận chéo (các phần tử ngoài đường chéo chính bằng 0).<br><br><em>Giải thích các đáp án khác:</em><br>• A: Ma trận không có tất cả các phần tử bằng 0.<br>• B: Đúng nhưng chưa đầy đủ.<br>• C: Đúng nhưng chưa đầy đủ."
-            },
-            {
-                difficulty: "Dễ",
-                question: "Cho $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$ và $B = \\begin{bmatrix} 5 & 6 \\\\ 7 & 8 \\end{bmatrix}$. Tính $A + B$.",
+                question: "Lực ma sát trượt xuất hiện khi nào?",
                 options: [
-                    "$\\begin{bmatrix} 6 & 8 \\\\ 10 & 12 \\end{bmatrix}$",
-                    "$\\begin{bmatrix} 5 & 12 \\\\ 21 & 32 \\end{bmatrix}$",
-                    "$\\begin{bmatrix} 4 & 4 \\\\ 4 & 4 \\end{bmatrix}$",
-                    "$\\begin{bmatrix} 6 & 10 \\\\ 8 & 12 \\end{bmatrix}$"
+                    "Khi một vật đứng yên trên mặt phẳng nằm ngang.",
+                    "Khi một vật trượt trên bề mặt của một vật khác.",
+                    "Khi một vật rơi tự do trong không khí.",
+                    "Khi một vật được treo vào lò xo."
                 ],
-                correct: 0,
-                explanation: "<strong>Đáp án đúng: A.</strong> Phép cộng hai ma trận cùng cấp được thực hiện bằng cách cộng từng phần tử tương ứng:<br>$$A + B = \\begin{bmatrix} 1+5 & 2+6 \\\\ 3+7 & 4+8 \\end{bmatrix} = \\begin{bmatrix} 6 & 8 \\\\ 10 & 12 \\end{bmatrix}$$<br><br><em>Giải thích các đáp án khác:</em><br>• B: Đây là kết quả của phép nhân Hadamard (nhân từng phần tử).<br>• C: Sai hoàn toàn.<br>• D: Sai vị trí các phần tử."
+                correct: 1, // index của đáp án đúng (0-based)
+                explanation: "<strong>Đáp án đúng: B.</strong> Lực ma sát trượt xuất hiện khi một vật trượt trên bề mặt của vật khác, có tác dụng cản trở chuyển động trượt. Công thức tính độ lớn: $F_{mst} = \\mu_t \\cdot N$, trong đó $\\mu_t$ là hệ số ma sát trượt, $N$ là áp lực lên mặt tiếp xúc. <br><br><em>Giải thích các đáp án khác:</em><br>• A: Vật đứng yên có thể có ma sát nghỉ, không phải ma sát trượt.<br>• C: Vật rơi tự do chịu lực cản của không khí (khác bản chất với ma sát trượt trên bề mặt rắn).<br>• D: Vật treo vào lò xo đứng yên chịu lực đàn hồi, không có ma sát trượt."
             },
             {
-                difficulty: "Dễ",
-                question: "Cho ma trận $A = \\begin{bmatrix} 2 & -1 \\\\ 3 & 4 \\end{bmatrix}$. Tính định thức $\\det(A)$.",
-                options: ["$\\det(A) = 5$", "$\\det(A) = 11$", "$\\det(A) = 8$", "$\\det(A) = -5$"],
-                correct: 1,
-                explanation: "<strong>Đáp án đúng: B.</strong> Với ma trận cấp 2 $A = \\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}$, định thức được tính bởi $\\det(A) = ad - bc$.<br>Áp dụng: $\\det(A) = 2 \\cdot 4 - (-1) \\cdot 3 = 8 + 3 = 11$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai do tính nhầm $2 \\cdot 4 - 3 = 5$.<br>• C: Sai do quên dấu trừ.<br>• D: Sai dấu."
-            },
-            {
-                difficulty: "Dễ",
-                question: "Ma trận chuyển vị của $A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}$ là:",
+                question: "Độ lớn của lực ma sát trượt phụ thuộc vào yếu tố nào sau đây?",
                 options: [
-                    "$\\begin{bmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{bmatrix}$",
-                    "$\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}$",
-                    "$\\begin{bmatrix} 6 & 5 & 4 \\\\ 3 & 2 & 1 \\end{bmatrix}$",
-                    "$\\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\\\ 5 & 6 \\end{bmatrix}$"
-                ],
-                correct: 0,
-                explanation: "<strong>Đáp án đúng: A.</strong> Ma trận chuyển vị $A^t$ được tạo bằng cách đổi hàng thành cột, cột thành hàng. Ma trận $A$ cỡ $2 \\times 3$ nên $A^t$ cỡ $3 \\times 2$:<br>$$A^t = \\begin{bmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{bmatrix}$$<br><br><em>Giải thích các đáp án khác:</em><br>• B: Không đổi gì cả.<br>• C: Đây không phải là chuyển vị.<br>• D: Sai kích thước."
-            },
-            {
-                difficulty: "Dễ",
-                question: "Ma trận không cấp $2 \\times 3$ là ma trận:",
-                options: [
-                    "$\\begin{bmatrix} 0 & 0 \\\\ 0 & 0 \\end{bmatrix}$",
-                    "$\\begin{bmatrix} 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{bmatrix}$",
-                    "$\\begin{bmatrix} 0 & 0 \\\\ 0 & 0 \\\\ 0 & 0 \\end{bmatrix}$",
-                    "$\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\end{bmatrix}$"
-                ],
-                correct: 1,
-                explanation: "<strong>Đáp án đúng: B.</strong> Ma trận không cấp $m \\times n$ là ma trận có $m$ hàng, $n$ cột và tất cả các phần tử bằng 0. Vậy ma trận không cấp $2 \\times 3$ có 2 hàng, 3 cột.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Cấp $2 \\times 2$.<br>• C: Cấp $3 \\times 2$.<br>• D: Không phải ma trận không (có phần tử bằng 1)."
-            },
-            {
-                difficulty: "Dễ",
-                question: "Cho $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$. Tính $2A$.",
-                options: [
-                    "$\\begin{bmatrix} 2 & 4 \\\\ 6 & 8 \\end{bmatrix}$",
-                    "$\\begin{bmatrix} 1 & 4 \\\\ 9 & 4 \\end{bmatrix}$",
-                    "$\\begin{bmatrix} 2 & 2 \\\\ 3 & 8 \\end{bmatrix}$",
-                    "$\\begin{bmatrix} 3 & 4 \\\\ 5 & 6 \\end{bmatrix}$"
-                ],
-                correct: 0,
-                explanation: "<strong>Đáp án đúng: A.</strong> Phép nhân ma trận với một số thực $k$ được thực hiện bằng cách nhân từng phần tử của ma trận với $k$:<br>$$2A = 2 \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix} = \\begin{bmatrix} 2 & 4 \\\\ 6 & 8 \\end{bmatrix}$$<br><br><em>Giải thích các đáp án khác:</em><br>• B, C, D: Đều là kết quả của việc nhân sai vị trí."
-            },
-            {
-                difficulty: "Dễ",
-                question: "Hai ma trận $A$ và $B$ được gọi là bằng nhau khi và chỉ khi:",
-                options: [
-                    "Chúng có cùng số hàng.",
-                    "Chúng có cùng số cột.",
-                    "Chúng cùng cỡ và các phần tử tương ứng bằng nhau.",
-                    "Chúng có cùng định thức."
+                    "Diện tích tiếp xúc giữa hai bề mặt.",
+                    "Tốc độ chuyển động của vật.",
+                    "Áp lực lên mặt tiếp xúc và hệ số ma sát trượt.",
+                    "Khối lượng riêng của vật liệu làm bề mặt."
                 ],
                 correct: 2,
-                explanation: "<strong>Đáp án đúng: C.</strong> Hai ma trận $A = [a_{ij}]_{m \\times n}$ và $B = [b_{ij}]_{m \\times n}$ được gọi là bằng nhau nếu chúng cùng cỡ và $a_{ij} = b_{ij}$ với mọi $i, j$.<br><br><em>Giải thích các đáp án khác:</em><br>• A, B: Chỉ cùng số hàng hoặc cùng số cột là chưa đủ.<br>• D: Cùng định thức không đảm bảo hai ma trận bằng nhau."
+                explanation: "<strong>Đáp án đúng: C.</strong> Theo công thức $F_{mst} = \\mu_t \\cdot N$, độ lớn lực ma sát trượt phụ thuộc vào hệ số ma sát trượt $\\mu_t$ (phụ thuộc vật liệu và tình trạng bề mặt) và áp lực $N$ lên mặt tiếp xúc. <br><br><em>Giải thích các đáp án khác:</em><br>• A: Diện tích tiếp xúc không ảnh hưởng đến độ lớn lực ma sát trượt trong mô hình lý tưởng.<br>• B: Tốc độ không ảnh hưởng đến độ lớn lực ma sát trượt (trong phạm vi thông thường).<br>• D: Khối lượng riêng không trực tiếp quyết định độ lớn lực ma sát."
             },
             {
-                difficulty: "Dễ",
-                question: "Ma trận tam giác trên là ma trận vuông có:",
+                question: "Một vật có khối lượng $m = 5\\,kg$ trượt đều trên mặt phẳng ngang. Hệ số ma sát trượt giữa vật và mặt phẳng là $\\mu_t = 0{,}2$. Lấy $g = 10\\,m/s^2$. Độ lớn lực ma sát trượt tác dụng lên vật là bao nhiêu?",
                 options: [
-                    "Tất cả các phần tử nằm trên đường chéo chính bằng 0.",
-                    "Tất cả các phần tử nằm dưới đường chéo chính bằng 0.",
-                    "Tất cả các phần tử nằm ngoài đường chéo chính bằng 0.",
-                    "Tất cả các phần tử đều bằng 0."
+                    "$F_{mst} = 1\\,N$",
+                    "$F_{mst} = 10\\,N$",
+                    "$F_{mst} = 5\\,N$",
+                    "$F_{mst} = 50\\,N$"
                 ],
                 correct: 1,
-                explanation: "<strong>Đáp án đúng: B.</strong> Ma trận tam giác trên là ma trận vuông cấp $n$ mà tất cả các phần tử nằm dưới đường chéo chính đều bằng 0, tức là $a_{ij} = 0$ nếu $i > j$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Đây là ma trận tam giác dưới.<br>• C: Đây là ma trận chéo.<br>• D: Đây là ma trận không."
+                explanation: "<strong>Đáp án đúng: B.</strong> Vì vật trượt trên mặt phẳng ngang, áp lực $N = P = mg = 5 \\times 10 = 50\\,N$.<br>Lực ma sát trượt: $F_{mst} = \\mu_t \\cdot N = 0{,}2 \\times 50 = 10\\,N$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai do nhầm $F = \\mu_t \\cdot m = 0{,}2 \\times 5 = 1\\,N$ (thiếu $g$).<br>• C: Sai do nhầm $F = m = 5\\,N$.<br>• D: Sai do lấy $N = 50\\,N$ nhưng quên nhân $\\mu_t$."
             },
             {
-                difficulty: "Dễ",
-                question: "Định thức của ma trận đơn vị cấp $n$ bằng bao nhiêu?",
-                options: ["$0$", "$1$", "$n$", "$-1$"],
+                question: "Lực ma sát nghỉ có đặc điểm nào sau đây?",
+                options: [
+                    "Luôn có độ lớn bằng $\\mu_n \\cdot N$.",
+                    "Xuất hiện khi vật có xu hướng chuyển động nhưng chưa chuyển động.",
+                    "Luôn ngược chiều với trọng lực.",
+                    "Chỉ xuất hiện khi vật đặt trên mặt phẳng nghiêng."
+                ],
                 correct: 1,
-                explanation: "<strong>Đáp án đúng: B.</strong> Ma trận đơn vị $I_n$ có các phần tử trên đường chéo chính bằng 1, còn lại bằng 0. Vì là ma trận tam giác (vừa trên vừa dưới), định thức bằng tích các phần tử trên đường chéo chính: $\\det(I_n) = 1 \\cdot 1 \\cdots 1 = 1$.<br><br><em>Giải thích các đáp án khác:</em><br>• A, C, D: Đều sai."
+                explanation: "<strong>Đáp án đúng: B.</strong> Lực ma sát nghỉ xuất hiện khi có ngoại lực tác dụng làm vật có xu hướng chuyển động nhưng vật vẫn chưa chuyển động. Độ lớn của nó bằng độ lớn ngoại lực thành phần song song với mặt tiếp xúc và có giá trị cực đại $F_{msn}^{max} = \\mu_n \\cdot N$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Chỉ khi ma sát nghỉ đạt cực đại mới bằng $\\mu_n \\cdot N$, bình thường nó nhỏ hơn.<br>• C: Ma sát nghỉ ngược chiều với xu hướng chuyển động, không nhất thiết ngược chiều trọng lực.<br>• D: Ma sát nghỉ cũng xuất hiện trên mặt phẳng ngang khi có lực đẩy ngang."
             },
+            {
+                question: "Một vật đặt trên mặt phẳng nghiêng góc $\\alpha = 30^\\circ$ so với phương ngang. Hệ số ma sát nghỉ cực đại giữa vật và mặt phẳng là $\\mu_n = 0{,}5$. Lấy $g = 10\\,m/s^2$. Điều kiện nào sau đây đúng để vật không trượt xuống?",
+                options: [
+                    "$\\tan\\alpha \\leq \\mu_n$",
+                    "$\\tan\\alpha \\geq \\mu_n$",
+                    "$\\sin\\alpha \\leq \\mu_n$",
+                    "$\\cos\\alpha \\leq \\mu_n$"
+                ],
+                correct: 0,
+                explanation: "<strong>Đáp án đúng: A.</strong> Để vật không trượt xuống trên mặt phẳng nghiêng, thành phần trọng lực song song mặt phẳng $P_{\\parallel} = mg\\sin\\alpha$ không được vượt quá ma sát nghỉ cực đại $F_{msn}^{max} = \\mu_n \\cdot N = \\mu_n mg\\cos\\alpha$.<br>Tức là: $mg\\sin\\alpha \\leq \\mu_n mg\\cos\\alpha \\Rightarrow \\tan\\alpha \\leq \\mu_n$.<br>Với $\\alpha = 30^\\circ$, $\\tan 30^\\circ \\approx 0{,}577 > 0{,}5$, nên thực tế vật sẽ trượt xuống.<br><br><em>Giải thích các đáp án khác:</em><br>• B: Đây là điều kiện để vật trượt xuống.<br>• C, D: Sai vì không phải điều kiện cân bằng lực đúng."
+            },
+            {
+                question: "Lực ma sát lăn có đặc điểm gì so với lực ma sát trượt?",
+                options: [
+                    "Lực ma sát lăn luôn lớn hơn lực ma sát trượt.",
+                    "Lực ma sát lăn thường nhỏ hơn lực ma sát trượt rất nhiều.",
+                    "Lực ma sát lăn không phụ thuộc vào áp lực.",
+                    "Lực ma sát lăn chỉ xuất hiện khi vật quay tại chỗ."
+                ],
+                correct: 1,
+                explanation: "<strong>Đáp án đúng: B.</strong> Lực ma sát lăn xuất hiện khi một vật lăn trên bề mặt vật khác, và hệ số ma sát lăn thường nhỏ hơn hệ số ma sát trượt rất nhiều lần. Đó là lý do người ta dùng bánh xe, ổ bi để giảm ma sát.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai, ma sát lăn nhỏ hơn ma sát trượt.<br>• C: Sai, ma sát lăn vẫn phụ thuộc vào áp lực $N$.<br>• D: Sai, ma sát lăn xuất hiện khi vật vừa lăn vừa chuyển động tịnh tiến."
+            },
+            {
+                question: "Một ô tô khối lượng $1{,}5$ tấn chuyển động thẳng đều trên đường nằm ngang. Hệ số ma sát lăn giữa bánh xe và mặt đường là $0{,}02$. Lấy $g = 10\\,m/s^2$. Lực phát động của động cơ bằng bao nhiêu?",
+                options: [
+                    "$F = 300\\,N$",
+                    "$F = 1500\\,N$",
+                    "$F = 3000\\,N$",
+                    "$F = 150\\,N$"
+                ],
+                correct: 0,
+                explanation: "<strong>Đáp án đúng: A.</strong> Đổi $m = 1{,}5$ tấn $= 1500\\,kg$.<br>Vì ô tô chuyển động thẳng đều, lực phát động cân bằng với lực ma sát lăn: $F = F_{msl} = \\mu_l \\cdot N = \\mu_l \\cdot mg$.<br>$F = 0{,}02 \\times 1500 \\times 10 = 300\\,N$.<br><br><em>Giải thích các đáp án khác:</em><br>• B: Sai do nhầm $F = m = 1500\\,N$.<br>• C: Sai do nhầm $F = 2mg = 3000\\,N$.<br>• D: Sai do nhầm $F = 0{,}01mg = 150\\,N$."
+            },
+            {
+                question: "Yếu tố nào sau đây làm tăng lực ma sát trượt?",
+                options: [
+                    "Làm nhẵn bề mặt tiếp xúc.",
+                    "Tăng áp lực lên bề mặt tiếp xúc.",
+                    "Bôi trơn bề mặt tiếp xúc.",
+                    "Giảm khối lượng của vật."
+                ],
+                correct: 1,
+                explanation: "<strong>Đáp án đúng: B.</strong> Theo công thức $F_{mst} = \\mu_t \\cdot N$, khi tăng áp lực $N$ lên mặt tiếp xúc thì lực ma sát trượt tăng.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Làm nhẵn bề mặt làm giảm hệ số ma sát $\\mu_t$, do đó giảm lực ma sát.<br>• C: Bôi trơn làm giảm mạnh hệ số ma sát.<br>• D: Giảm khối lượng làm giảm áp lực $N$, do đó giảm lực ma sát."
+            },
+            {
+                question: "Trong các trường hợp sau, trường hợp nào lực ma sát có lợi?",
+                options: [
+                    "Ma sát giữa đế giày và mặt đường khi đi bộ.",
+                    "Ma sát giữa xích và đĩa xe đạp.",
+                    "Ma sát giữa trục quay và ổ trục.",
+                    "Ma sát giữa pít-tông và xi-lanh động cơ."
+                ],
+                correct: 0,
+                explanation: "<strong>Đáp án đúng: A.</strong> Ma sát giữa đế giày và mặt đường là có lợi vì nó giúp ta bám đường, không bị trượt ngã khi đi lại.<br><br><em>Giải thích các đáp án khác:</em><br>• B: Ma sát giữa xích và đĩa xe đạp gây mài mòn, có hại.<br>• C: Ma sát ở trục quay và ổ trục gây cản trở chuyển động, có hại.<br>• D: Ma sát giữa pít-tông và xi-lanh gây mài mòn, giảm hiệu suất động cơ, có hại."
+            },
+            {
+                question: "Một vật khối lượng $m = 2\\,kg$ bắt đầu trượt xuống trên mặt phẳng nghiêng góc $\\alpha = 45^\\circ$. Hệ số ma sát trượt $\\mu_t = 0{,}1$. Lấy $g = 10\\,m/s^2$. Gia tốc của vật là bao nhiêu?",
+                options: [
+                    "$a \\approx 6{,}4\\,m/s^2$",
+                    "$a \\approx 7{,}1\\,m/s^2$",
+                    "$a \\approx 5{,}0\\,m/s^2$",
+                    "$a \\approx 8{,}2\\,m/s^2$"
+                ],
+                correct: 0,
+                explanation: "<strong>Đáp án đúng: A.</strong> Chọn trục Ox dọc theo mặt phẳng nghiêng hướng xuống.<br>Thành phần trọng lực kéo vật xuống: $P_{\\parallel} = mg\\sin\\alpha$.<br>Lực ma sát trượt ngược chiều chuyển động: $F_{mst} = \\mu_t \\cdot N = \\mu_t mg\\cos\\alpha$.<br>Theo định luật II Newton: $ma = mg\\sin\\alpha - \\mu_t mg\\cos\\alpha$<br>$\\Rightarrow a = g(\\sin\\alpha - \\mu_t\\cos\\alpha) = 10(\\sin 45^\\circ - 0{,}1 \\cdot \\cos 45^\\circ)$<br>$= 10 \\times \\frac{\\sqrt{2}}{2}(1 - 0{,}1) = 10 \\times 0{,}707 \\times 0{,}9 \\approx 6{,}36 \\approx 6{,}4\\,m/s^2$.<br><br><em>Giải thích các đáp án khác:</em><br>• B: Sai do bỏ qua ma sát: $a = g\\sin 45^\\circ \\approx 7{,}07\\,m/s^2$.<br>• C, D: Sai do tính toán nhầm hệ số."
+            }
+        ];
 
-            // ===== CẤP ĐỘ TRUNG BÌNH (12 câu) =====
-            {
-                difficulty: "Trung bình",
-                question: "Cho $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$ và $B = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}$. Tính tích $AB$.",
-                options: [
-                    "$AB = \\begin{bmatrix} 2 & 1 \\\\ 4 & 3 \\end{bmatrix}$",
-                    "$AB = \\begin{bmatrix} 0 & 2 \\\\ 3 & 0 \\end{bmatrix}$",
-                    "$AB = \\begin{bmatrix} 3 & 4 \\\\ 1 & 2 \\end{bmatrix}$",
-                    "$AB = \\begin{bmatrix} 1 & 2 \\\\ 4 & 3 \\end{bmatrix}$"
-                ],
-                correct: 0,
-                explanation: "<strong>Đáp án đúng: A.</strong> Nhân hai ma trận theo quy tắc \"hàng nhân cột\":<br>$$AB = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix} \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix} = \\begin{bmatrix} 1\\cdot0+2\\cdot1 & 1\\cdot1+2\\cdot0 \\\\ 3\\cdot0+4\\cdot1 & 3\\cdot1+4\\cdot0 \\end{bmatrix} = \\begin{bmatrix} 2 & 1 \\\\ 4 & 3 \\end{bmatrix}$$<br><br><em>Giải thích các đáp án khác:</em><br>• B, C, D: Đều là kết quả của việc nhân sai vị trí hàng/cột."
-            },
-            {
-                difficulty: "Trung bình",
-                question: "Ma trận nghịch đảo của $A = \\begin{bmatrix} 2 & 1 \\\\ 5 & 3 \\end{bmatrix}$ là:",
-                options: [
-                    "$A^{-1} = \\begin{bmatrix} 3 & -1 \\\\ -5 & 2 \\end{bmatrix}$",
-                    "$A^{-1} = \\begin{bmatrix} 3 & 1 \\\\ 5 & 2 \\end{bmatrix}$",
-                    "$A^{-1} = \\begin{bmatrix} -3 & 1 \\\\ 5 & -2 \\end{bmatrix}$",
-                    "$A^{-1} = \\begin{bmatrix} 2 & -1 \\\\ -5 & 3 \\end{bmatrix}$"
-                ],
-                correct: 0,
-                explanation: "<strong>Đáp án đúng: A.</strong> Với ma trận cấp 2 $A = \\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}$, nếu $\\det(A) = ad - bc \\neq 0$ thì:<br>$$A^{-1} = \\frac{1}{ad-bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$<br>Ở đây $\\det(A) = 2\\cdot3 - 1\\cdot5 = 1$. Do đó:<br>$$A^{-1} = \\begin{bmatrix} 3 & -1 \\\\ -5 & 2 \\end{bmatrix}$$<br><br><em>Giải thích các đáp án khác:</em><br>• B, D: Sai vị trí dấu.<br>• C: Sai dấu toàn bộ."
-            },
-            {
-                difficulty: "Trung bình",
-                question: "Ma trận $A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 2 & 4 & 6 \\\\ 1 & 1 & 1 \\end{bmatrix}$ có hạng bằng bao nhiêu?",
-                options: ["$\\text{rank}(A) = 1$", "$\\text{rank}(A) = 2$", "$\\text{rank}(A) = 3$", "$\\text{rank}(A) = 0$"],
-                correct: 1,
-                explanation: "<strong>Đáp án đúng: B.</strong> Ta thấy hàng 2 bằng 2 lần hàng 1 ($R_2 = 2R_1$), nên hai hàng này phụ thuộc tuyến tính. Do đó hạng tối đa chỉ có thể là 2.<br>Xét hai hàng $R_1 = (1, 2, 3)$ và $R_3 = (1, 1, 1)$: chúng không tỉ lệ, nên độc lập tuyến tính.<br>Vậy $\\text{rank}(A) = 2$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai vì $R_1$ và $R_3$ độc lập tuyến tính.<br>• C: Sai vì $R_2 = 2R_1$.<br>• D: Sai vì ma trận khác không."
-            },
-            {
-                difficulty: "Trung bình",
-                question: "Điều kiện cần và đủ để ma trận vuông $A$ cấp $n$ khả nghịch là:",
-                options: [
-                    "$A$ có tất cả các phần tử khác 0.",
-                    "$\\det(A) \\neq 0$.",
-                    "$A$ là ma trận đối xứng.",
-                    "$A$ có ít nhất một hàng toàn số 0."
-                ],
-                correct: 1,
-                explanation: "<strong>Đáp án đúng: B.</strong> Ma trận vuông $A$ khả nghịch khi và chỉ khi $\\det(A) \\neq 0$. Khi đó:<br>$$A^{-1} = \\frac{1}{\\det(A)} \\cdot \\text{adj}(A)$$<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai, ví dụ $A = \\begin{bmatrix} 1 & 1 \\\\ 1 & 1 \\end{bmatrix}$ có các phần tử khác 0 nhưng $\\det(A) = 0$.<br>• C: Ma trận đối xứng không đảm bảo khả nghịch.<br>• D: Nếu có hàng toàn số 0 thì $\\det(A) = 0$, không khả nghịch."
-            },
-            {
-                difficulty: "Trung bình",
-                question: "Phát biểu nào sau đây về định thức là <strong>SAI</strong>?",
-                options: [
-                    "$\\det(A^T) = \\det(A)$.",
-                    "$\\det(AB) = \\det(A) \\cdot \\det(B)$.",
-                    "$\\det(A + B) = \\det(A) + \\det(B)$.",
-                    "Nếu đổi chỗ hai hàng thì định thức đổi dấu."
-                ],
-                correct: 2,
-                explanation: "<strong>Đáp án đúng (phát biểu SAI): C.</strong> Định thức <em>không</em> có tính chất cộng tuyến tính. Nói chung $\\det(A+B) \\neq \\det(A) + \\det(B)$.<br>Ví dụ: $A = \\begin{bmatrix} 1 & 0 \\\\ 0 & 0 \\end{bmatrix}$, $B = \\begin{bmatrix} 0 & 0 \\\\ 0 & 1 \\end{bmatrix}$ thì $\\det(A) = \\det(B) = 0$ nhưng $\\det(A+B) = 1$.<br><br><em>Giải thích các đáp án còn lại (đều ĐÚNG):</em><br>• A: Định thức không đổi khi chuyển vị.<br>• B: Tính nhân tính của định thức.<br>• D: Đổi chỗ hai hàng thì định thức đổi dấu."
-            },
-            {
-                difficulty: "Trung bình",
-                question: "Hạng của ma trận $A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\end{bmatrix}$ bằng bao nhiêu?",
-                options: ["$\\text{rank}(A) = 1$", "$\\text{rank}(A) = 2$", "$\\text{rank}(A) = 3$", "$\\text{rank}(A) = 0$"],
-                correct: 1,
-                explanation: "<strong>Đáp án đúng: B.</strong> Nhận xét: $R_3 - R_2 = (3, 3, 3) = R_2 - R_1$, tức $R_1 + R_3 = 2R_2$, nên ba hàng phụ thuộc tuyến tính. Do đó $\\text{rank}(A) \\leq 2$.<br>Mặt khác, định thức con cấp 2 $\\begin{vmatrix} 1 & 2 \\\\ 4 & 5 \\end{vmatrix} = 5 - 8 = -3 \\neq 0$, nên $\\text{rank}(A) \\geq 2$.<br>Vậy $\\text{rank}(A) = 2$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai vì có định thức con cấp 2 khác 0.<br>• C: Sai vì $\\det(A) = 0$.<br>• D: Sai vì ma trận khác không."
-            },
-            {
-                difficulty: "Trung bình",
-                question: "Cho ma trận $A$ vuông cấp 3 có $\\det(A) = 4$. Khi đó $\\det(2A)$ bằng bao nhiêu?",
-                options: ["$\\det(2A) = 8$", "$\\det(2A) = 32$", "$\\det(2A) = 16$", "$\\det(2A) = 4$"],
-                correct: 1,
-                explanation: "<strong>Đáp án đúng: B.</strong> Với ma trận vuông cấp $n$ và hằng số $k$, ta có: $\\det(kA) = k^n \\det(A)$.<br>Ở đây $n = 3$ và $k = 2$, nên:<br>$$\\det(2A) = 2^3 \\cdot 4 = 8 \\cdot 4 = 32$$<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai do nhầm $\\det(2A) = 2 \\cdot 4 = 8$.<br>• C: Sai do nhầm $n=2$.<br>• D: Sai do nghĩ $\\det(2A) = \\det(A)$."
-            },
-            {
-                difficulty: "Trung bình",
-                question: "Phát biểu nào sau đây là <strong>ĐÚNG</strong> về ma trận nghịch đảo?",
-                options: [
-                    "Mọi ma trận vuông đều có ma trận nghịch đảo.",
-                    "Nếu $A$ khả nghịch thì $(A^{-1})^{-1} = A$.",
-                    "Nếu $A, B$ khả nghịch thì $(AB)^{-1} = A^{-1}B^{-1}$.",
-                    "Ma trận nghịch đảo của $A$ là ma trận chuyển vị của $A$."
-                ],
-                correct: 1,
-                explanation: "<strong>Đáp án đúng: B.</strong> Nếu $A$ khả nghịch thì $A^{-1}$ cũng khả nghịch và $(A^{-1})^{-1} = A$.<br><br><em>Giải thích các đáp án khác:</em><br>• A: Sai, chỉ ma trận vuông có $\\det \\neq 0$ mới khả nghịch.<br>• C: Sai, công thức đúng là $(AB)^{-1} = B^{-1}A^{-1}$.<br>• D: Sai, chỉ ma trận trực giao mới có $A^{-1} = A^T$."
-            },
-            {
-                difficulty: "Trung bình",
-                question: "Cho $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$ và $B = \\begin{bmatrix} 2 & 0 \\\\ 1 & 2 \\end{bmatrix}$. Tính $\\det(AB)$.",
-                options: ["$\\det(AB) = -4$", "$\\det(AB) = 4$", "$\\det(AB) = 8$", "$
+        // ==================== BIẾN TOÀN CỤC ====================
+        let score = 0;
+        let answeredCount = 0;
+        const totalQuestions = questions.length;
+        const userAnswers = new Array(totalQuestions).fill(null); // lưu index đáp án đã chọn
+
+        // ==================== KHỞI TẠO GIAO DIỆN ====================
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            questions.forEach((q, qIndex) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `question-${qIndex}`;
+
+                // Số thứ tự câu hỏi
+                const numberBadge = document.createElement('div');
+                numberBadge.className = 'question-number';
+                numberBadge.textContent = `Câu ${qIndex + 1}`;
+                card.appendChild(numberBadge);
+
+                // Nội dung câu hỏi
+                const qText = document.createElement('div');
+                qText.className = 'question-text';
+                qText.innerHTML = q.question;
+                card.appendChild(qText);
+
+                // Các lựa chọn
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+
+                q.options.forEach((opt, oIndex) => {
+                    const optDiv = document.createElement('div');
+                    optDiv.className = 'option';
+                    optDiv.dataset.qIndex = qIndex;
+                    optDiv.dataset.oIndex = oIndex;
+
+                    const label = document.createElement('span');
+                    label.className = 'label';
+                    label.textContent = String.fromCharCode(65 + oIndex); // A, B, C, D
+
+                    const optText = document.createElement('span');
+                    optText.className = 'option-text';
+                    optText.innerHTML = opt;
+
+                    optDiv.appendChild(label);
+                    optDiv.appendChild(optText);
+
+                    optDiv.addEventListener('click', () => handleAnswer(qIndex, oIndex));
+                    optionsDiv.appendChild(optDiv);
+                });
+
+                card.appendChild(optionsDiv);
+
+                // Phần giải thích
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'explanation';
+                explanationDiv.id = `explanation-${qIndex}`;
+                explanationDiv.innerHTML = q.explanation;
+                card.appendChild(explanationDiv);
+
+                container.appendChild(card);
+            });
+
+            // Render lại MathJax sau khi thêm nội dung
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise().catch((err) => console.log('MathJax error:', err));
+            }
+        }
+
+        // ==================== XỬ LÝ CHỌN ĐÁP ÁN ====================
+        function handleAnswer(qIndex, oIndex) {
+            // Nếu đã trả lời câu này rồi thì bỏ qua
+            if (userAnswers[qIndex] !== null) return;
+
+            const q = questions[qIndex];
+            const isCorrect = (oIndex === q.correct);
+
+            // Lưu câu trả lời
+            userAnswers[qIndex] = oIndex;
+            answeredCount++;
+
+            // Cập nhật điểm
+            if (isCorrect) {
+                score++;
+                document.getElementById('score').textContent = score;
+            }
+
+            // Lấy tất cả các option của câu hỏi này
+            const card = document.getElementById(`question-${qIndex}`);
+            const allOptions = card.querySelectorAll('.option');
+
+            // Vô hiệu hóa tất cả các lựa chọn
+            allOptions.forEach(opt => {
+                opt.classList.add('disabled');
+                const oIdx = parseInt(opt.dataset.oIndex);
+                if (oIdx === q.correct) {
+                    opt.classList.add('correct');
+                } else if (oIdx === oIndex && !isCorrect) {
+                    opt.classList.add('incorrect');
+                }
+            });
+
+            // Nếu chọn đúng, thêm highlight cho card
+            if (isCorrect) {
+                card.classList.add('correct-highlight');
+            }
+
+            // Hiện giải thích
+            const explanation = document.getElementById(`explanation-${qIndex}`);
+            explanation.classList.add('show');
+
+            // Render lại MathJax cho phần giải thích vừa hiện
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([explanation]).catch((err) => console.log('MathJax error:', err));
+            }
+
+            // Kiểm tra hoàn thành
+            if (answeredCount === totalQuestions) {
+                document.getElementById('completedBadge').classList.add('show');
+            }
+        }
+
+        // ==================== RESET ====================
+        function resetQuiz() {
+            score = 0;
+            answeredCount = 0;
+            userAnswers.fill(null);
+            document.getElementById('score').textContent = '0';
+            document.getElementById('completedBadge').classList.remove('show');
+            renderQuiz();
+        }
+
+        // ==================== KHỞI CHẠY ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+        });
+    </script>
+</body>
+</html>
